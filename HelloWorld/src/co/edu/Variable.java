@@ -20,5 +20,8 @@ public class Variable {
 		}
 		System.out.println(c1);
 		System.out.println((int) c1 + 1);
+		
+		System.out.println("이력변경추가.");
+		// 이력변경추가 2022.07.01 12:55
 	}
 }
