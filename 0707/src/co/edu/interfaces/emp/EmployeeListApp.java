@@ -15,6 +15,10 @@ public class EmployeeListApp {
 			
 			int selectNo = scn.nextInt();
 			if(selectNo == 1) {
+				for(int i =0; i<employeeId.length; i++)
+					int sum;
+					sum += i;
+					
 				
 			}else if(selectNo ==2) {
 				
