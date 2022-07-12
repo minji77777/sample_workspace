@@ -24,6 +24,6 @@ public class Variable {
 		System.out.println("이력변경추가.");
 		// 이력변경추가 2022.07.01 12:55
 		
-		System.out.println("깃에서 변경하였습니다")
+		System.out.println("깃에서 변경하였습니다");
 	}
 }
