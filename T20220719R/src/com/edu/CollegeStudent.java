@@ -22,6 +22,8 @@ public class CollegeStudent extends Student {
 	public String toString() {
 		return " 대학생 [studNo=" + getStudNo() + ", studName=" + getStudName() + ", score=" + getScore() + ", prof=" + prof+", major"+ major+"]";
 	}
+	
+	
 
 }
 
