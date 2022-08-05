@@ -3,7 +3,7 @@ package com.yedam.member;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yedam.common.DAO;
+import com.bank.common.DAO;
 
 public class MemberManagement extends DAO {
 
@@ -17,7 +17,8 @@ public class MemberManagement extends DAO {
 
 	public static MemberManagement getInstance() {
 		if (mm == null) {
-			return new MemberManagement();
+			mm = new MemberManagement();
+			return mm;
 		} else {
 			return mm;
 		}
