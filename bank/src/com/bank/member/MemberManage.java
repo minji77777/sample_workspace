@@ -19,6 +19,10 @@ public class MemberManage extends DAO {
 	//id/pw/.../
 	
 	//로그인 메소드
+	
+	
+	
+	
 	public Member loginInfo(String id) {
 		Member member = null;
 		try {
@@ -32,11 +36,13 @@ public class MemberManage extends DAO {
 			
 			if(rs.next()) {  //단건조회
 				member = new Member();
-				member.setAccountId(rs.getString("member_id"));
+				member.setMemberId(rs.getString("member_id"));
 				member.setMemberPw(rs.getString("member_pw"));
 				member.setMemberName(rs.getString("member_name"));
 				member.setAccountId(rs.getString("account_id"));
 				member.setRole(rs.getString("role"));
+				
+				
 			}
 			
 		}catch(Exception e) {
@@ -51,9 +57,10 @@ public class MemberManage extends DAO {
 		int result= 0;
 		try {
 			conn();
-			String sql ="insert into bankMember (member_id,member_pw,member_name,member_role) values(?,?,?,?)";
+			String sql ="insert into bankMember (member_id,member_pw,member_name,role) values (?,?,?,?)";
 			pstmt =conn.prepareStatement(sql);
-			pstmt.setString(1, member.getAccountId());
+			
+			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getMemberPw());
 			pstmt.setString(3, member.getMemberName());
 			pstmt.setString(4, member.getRole());

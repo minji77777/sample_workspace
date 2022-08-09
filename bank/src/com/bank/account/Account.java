@@ -1,6 +1,10 @@
 package com.bank.account;
 
-import java.sql.Date;  
+import java.sql.Date;
+
+import lombok.Data;
+
+
 //java.sql.Date; : 년/월/일
 //java.util.Date;: 년/월/일/시/분/초 (더 자세하고 처리하기 까다로움)
 
@@ -8,6 +12,9 @@ import java.sql.Date;
 MEMBER_ID  NOT NULL VARCHAR2(20) 
 BALANCE             NUMBER       
 CREDATE             DATE */
+
+
+
 
 public class Account {
 	

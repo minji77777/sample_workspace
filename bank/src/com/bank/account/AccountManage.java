@@ -1,6 +1,12 @@
 package com.bank.account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bank.common.DAO;
+
+
+
 
 public class AccountManage extends DAO {
 
@@ -27,7 +33,7 @@ public class AccountManage extends DAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			;
+			
 		} finally {
 			disconnect();
 		}
@@ -60,6 +66,11 @@ public class AccountManage extends DAO {
 				// account.getBalance => 입금하고자하는 금액
 				// balance + account.getBalance = 입금한 금액
 				account.setBalance(balance + account.getBalance());
+				
+				String sql = "update account set balance =? where account_id =?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, account.getBalance());
+				pstmt.setString(2, account.getAccountId());
 				result = pstmt.executeUpdate();
 
 			} else if (cmd == 2) {
@@ -116,9 +127,9 @@ public class AccountManage extends DAO {
 		// toAccount => 받는 사람
 		// fromAccount => 보내는 사람
 		// balance=> 금액
-		
+
 		int result = 0;
-		
+
 		try {
 			conn();
 
@@ -129,21 +140,21 @@ public class AccountManage extends DAO {
 			pstmt.setInt(1, balance);
 			pstmt.setString(2, fromAccount);
 			result = pstmt.executeUpdate();
-			
-			if(result==1) {
+
+			if (result == 1) {
 				System.out.println("정상 출금");
-				//받는 사람의 계좌에 돈을 넣어주는 sql
+				// 받는 사람의 계좌에 돈을 넣어주는 sql
 				String sql = "update account set balance = balance+? where account_id =?";
-				pstmt= conn.prepareStatement(sql);
+				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, balance);
 				pstmt.setString(2, toAccount);
 				int result2 = pstmt.executeUpdate();
-				if(result2==1) {
+				if (result2 == 1) {
 					System.out.println("계좌 이체 완료");
-				}else {
+				} else {
 					System.out.println("계좌 이체 실패");
 				}
-			}else {
+			} else {
 				System.out.println("출금 실패");
 			}
 
@@ -155,6 +166,33 @@ public class AccountManage extends DAO {
 		} finally {
 			disconnect();
 		}
-		
+
+	}
+	// 계좌조회
+	public List<Account>getAccountList(String memberId){
+		List<Account> list = new ArrayList<>();
+		Account account = null;
+		try {
+			conn();
+			String sql = "select * from account where member_id = ?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				account = new Account();
+				account.setAccountId(rs.getString("account_id"));
+				account.setMemberId(rs.getString("member_id"));				
+				account.setBalance(rs.getInt("balance"));
+				account.setCredate(rs.getDate("credate"));
+				list.add(account);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconnect();
+		}
+		return list;
 	}
 }

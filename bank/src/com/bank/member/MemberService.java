@@ -6,7 +6,7 @@ public class MemberService {
 	
 	
 	
-	public static Member MemberInfo=null;
+	public static Member MemberInfo=null;  // 기본값 : null, 로그인 실패
 	Scanner scn = new Scanner(System.in);
 	
 	//로그인
@@ -22,7 +22,7 @@ public class MemberService {
 		//1 row 
 		//id/pw....
 		member=MemberManage.getInstance().loginInfo(id);
-		
+		                                              
 		//DB 조회한 정보와 내가 입력한 PW 비교
 		if(member.getMemberPw().equals(pw)) {
 			MemberInfo = member;
@@ -37,6 +37,8 @@ public class MemberService {
 		if(MemberInfo != null)
 		MemberInfo = null;
 	}
+	
+	
 	//고객등록
 	public void registerCustomer() {
 		Member member = new Member();

@@ -1,10 +1,12 @@
 package com.bank.common;
 
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class DAO {
 	// DAO (Data Access Object) :db에 접근하는 객체
@@ -36,11 +38,14 @@ public class DAO {
 	// 쿼리문을 담고 쿼리문을 실행하는 객체 (밑의 2가지 방법)  
 	protected PreparedStatement pstmt = null; // 1  dml일때 
 	protected Statement stmt = null; // 2번째 방법 sql일때 유리
+	
+	Properties pro = new Properties()
+			;
 
-	String driver = "oracle.jdbc.driver.OracleDriver"; // 고정
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String id = "test";
-	String pw = "1234";
+	String driver = ""; // 변수만 선언
+	String url = "";
+	String id = "";
+	String pw = "";
 
 	public void conn() {
 		try {
@@ -72,4 +77,19 @@ public class DAO {
 		}
 	}
 
+
+
+	private void getProperties() {
+		try {
+			FileReader resource = new FileReader("src/config/db.properties");
+			pro.load(resource);
+			driver = pro.getProperty("driver");
+			url = pro.getProperty("url");
+			id = pro.getProperty("id");
+			pw = pro.getProperty("pw");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+}
 }
