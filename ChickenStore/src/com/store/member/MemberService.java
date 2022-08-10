@@ -73,7 +73,13 @@ public class MemberService extends DAO{
 		System.out.println("삭제할 비밀번호의 ID >");
 		String Id = scn.nextLine();
 
-		MemberManagement.getInstance().deleteMember(Id);
+		int result=MemberManagement.getInstance().deleteMember(Id);
+		
+		if(result==1) {
+			System.out.println("삭제 성공");
+		}else {
+			System.out.println("삭제 실패");
+		}
 
 	}
 
@@ -125,18 +131,27 @@ public class MemberService extends DAO{
 	}
 	//전체 조회
 	public void serachAll() {
+		Member member1 =null;
 		
 		
-		Member member = null;
-		int result = MemberManagement.getInstance().customerAll();
+		System.out.println(member1.toString());
 		
-		member.toString();
-		
-		
+	
 	
 	}
 	
 	//단건 조회
+	
+public void oneCustomer() {
+		
+		
+		Member member1 = null;
+		
+		System.out.println(member1.toString());
+		
+	
+	
+	}
 
 }
 

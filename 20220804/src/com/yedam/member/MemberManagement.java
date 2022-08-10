@@ -3,7 +3,7 @@ package com.yedam.member;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bank.common.DAO;
+import com.yedam.common.DAO;
 
 public class MemberManagement extends DAO {
 

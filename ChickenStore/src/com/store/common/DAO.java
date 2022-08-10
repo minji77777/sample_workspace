@@ -43,10 +43,10 @@ package com.store.common;
 		Properties pro = new Properties()
 				;
 
-		String driver = ""; // 변수만 선언
-		String url = "";
-		String id = "";
-		String pw = "";
+		String driver = "oracle.jdbc.driver.OracleDriver"; // 고정
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String id = "test";
+		String pw = "1234";
 
 		public void conn() {
 			try {
