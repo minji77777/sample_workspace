@@ -2,8 +2,7 @@ package com.store.app;
 
 import java.util.Scanner;
 
-import com.store.member.Member;
-import com.store.member.MemberManagement;
+import com.store.board.BoardService;
 import com.store.member.MemberService;
 import com.store.order.OrderFoodService;
 
@@ -12,6 +11,7 @@ public class Application {
 	int menuNo = 0;
 	MemberService ms = new MemberService();
 	OrderFoodService ofs = new OrderFoodService();
+	BoardService bs = new BoardService();s
 
 	public Application() {
 		run();
@@ -27,7 +27,7 @@ public class Application {
 		switch (role) {
 		case 1: // 회원
 			System.out.println("──────────────────────────────  <회원>  ──────────────────────────────");
-			System.out.println("1. 로그인 | 2.회원가입 | 3.회원정보 변경 | 4.주문하기 | 5.리뷰 | 6. 이벤트 ");
+			System.out.println("1. 로그인 | 2.회원가입 | 3.회원정보 변경 | 4.주문하기 | 5.리뷰 | 6. 공지사항 | 7. 이벤트 ");
 			System.out.println("───────────────────────────────────────────────────────────────────── ");
 
 			int menuNo1 = Integer.parseInt(scn.nextLine());
@@ -57,18 +57,21 @@ public class Application {
 				} else if (menuNo1 == 5) { // 리뷰
 					ms.review();
 					break;
-				} else if (menuNo1 == 6) {// 이벤트
-
+				} else if(menuNo1 == 6) { //공지사항 보기
+					
+				
 					break;
 				}
-			}
+				else if (menuNo1 == 7) {// 이벤트
 
+					break;
+			}
 			break;
+			}
 		case 2: // 관리자
 			System.out.println("*************************  <관리자>  **************************************************");
 			System.out.println("1.로그인 | 2.회원 조회 | 3.회원 삭제 | 4.주문조회 | 5.총 매출 | 6.공지사항 | 7.이벤트 | 8.리뷰관리 ");
-			System.out
-					.println("**************************************************************************************");
+			System.out.println("**************************************************************************************");
 
 			while (true) {
 				System.out.println("메뉴 선택>");
@@ -95,16 +98,18 @@ public class Application {
 					break;
 
 				} else if (menuNo == 4) {// 주문조회
-					ofs.
+					ofs.seeAll();
+					break;
 				} else if (menuNo == 5) { // 총 매출
-
+					ofs.money();
 				} else if (menuNo == 6) {// 공지사항
-
-				} else if (menuNo == 7) {// 이벤트
+					bs.seeBoard();
+				} else if (menuNo == 7) {// 이벤트 관리
 
 				} else if (menuNo == 8) {// 리뷰관리
 
 				}
+
 			}
 
 		}

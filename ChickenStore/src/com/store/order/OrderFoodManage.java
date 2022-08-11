@@ -93,7 +93,7 @@ public class OrderFoodManage extends DAO {
 	//주문조회
 	public List<OrderFood> seeAll() {
 		
-		List<OrderFood> list1 = new ArrayList<>();
+		List<OrderFood> list = new ArrayList<>();
 		OrderFood of = null;
 		
 		try {
@@ -113,7 +113,7 @@ public class OrderFoodManage extends DAO {
 				of.setCount(rs.getInt("count"));
 				of.setOrder_date(rs.getString("order_date"));
 		
-				list1.add(of);
+				list.add(of);
 			}
 					
 		}catch (Exception e) {
@@ -122,7 +122,40 @@ public class OrderFoodManage extends DAO {
 			disconnect();
 		}
 				
-		return list1;
+		return list;
+	
+	}
+	
+	//총매출(사장-날짜별로)
+	public List<OrderFood> money() {
+		
+		List<OrderFood> list = new ArrayList<>();
+		OrderFood of = null;
+		
+		try {
+			conn();
+			String sql = "select price*count money FROM ORDERFOOD group by order_date ";
+			
+			stmt=conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				of = new OrderFood();
+				
+				of.setPrice(rs.getInt("price"));
+				of.setCount(rs.getInt("count"));
+				of.setOrder_date(rs.getString("order_date"));
+		
+				list.add(of);
+			}
+					
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconnect();
+		}
+				
+		return list;
 	
 	}
 	

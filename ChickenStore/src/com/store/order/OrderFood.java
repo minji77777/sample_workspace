@@ -51,13 +51,13 @@ public class OrderFood {
 	}
 	
 	
-	
-	public OrderFood(String menu, int price) {
-		
-		this.menuName = menu;
-		this.price = price;
-		
+	@Override
+	public String toString() {
+		return "주문내역 \n"+ "["+member_id+ menuName  + count + order_date+"]";
 	}
+	
+	
+	
 	public OrderFood() {
 		
 	}

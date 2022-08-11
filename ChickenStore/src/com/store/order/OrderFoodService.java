@@ -46,7 +46,31 @@ public class OrderFoodService {
 	}
 	// 주문조회하기(사장님)
 	public void seeAll() {
-		System.out.println("-----------------------");
-		System.out.println();
+		OrderFood of = new OrderFood();
+		System.out.println("고객ID   치킨   수량   구매일");
+		System.out.println("---------------------------");
 	}
-}
+		
+		
+		//총 매출
+		public void money() {
+			OrderFood of = new OrderFood();
+			System.out.println("────────"+of.getOrder_date()+"────────");
+			System.out.println(OrderFoodManage.getInstance().money());
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
