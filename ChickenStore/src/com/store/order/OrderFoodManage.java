@@ -41,7 +41,7 @@ public class OrderFoodManage extends DAO {
 			
 			while(rs.next()) {
 				of = new OrderFood();
-				of.setNo(rs.getString("no"));
+				of.setNo(rs.getInt("no"));
 				of.setMenuName(rs.getString("menu_name"));
 				of.setPrice(rs.getInt("price"));
 		
@@ -58,26 +58,20 @@ public class OrderFoodManage extends DAO {
 }
 
 	//치킨 주문하기
-	public List<OrderFood> orderMenu() {
-		
-		List<OrderFood> list = new ArrayList<>();
-		OrderFood of = null;
+	public OrderFood orderMenu(OrderFood orderfood) {
+		OrderFood of = new OrderFood();
 		
 		try {
 			conn();
-			String sql = "select NO,MENU_NAME,PRICE,PRICE*COUNT SUM_PRICE FROM ORDERFOOD";
+			String sql = "select MENU_NAME,PRICE, count, PRICE*COUNT \"총 합계\" FROM ORDERFOOD where no = ?" ;
 			
-//			pstmt = conn.prepareStatement(sql);
-//			rs = pstmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);	
+			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				of = new OrderFood();
-				of.setNo(rs.getString("no"));
-				of.setMenuName(rs.getString("menu_name"));
-				of.setPrice(rs.getInt("price"));
-				of.setCount(rs.getInt("count"));
-		
-				list.add(of);
+			pstmt.setInt(1, rs.getInt("no"));
+					
+			while (rs.next()) {
+				
 			}
 					
 		}catch (Exception e) {
@@ -86,7 +80,7 @@ public class OrderFoodManage extends DAO {
 			disconnect();
 		}
 				
-		return list;
+		return of;
 	
 	}
 	
@@ -100,18 +94,18 @@ public class OrderFoodManage extends DAO {
 			conn();
 			String sql = "select o.no, m.member_id, o.menu_name, o.count, o.order_date "
 					+ "from member m, orderfood o "
-					+ "where m.member_id = o.member_id;";
+					+ "where m.member_id = o.member_id";
 			stmt=conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
 				of = new OrderFood();
-				of.setNo(rs.getString("no"));
-				of.setMember_id(rs.getString("member_id"));
+				of.setNo(rs.getInt("no"));
+				of.setMemberId(rs.getString("member_id"));
 				of.setMenuName(rs.getString("menu_name"));
 				of.setPrice(rs.getInt("price"));
 				of.setCount(rs.getInt("count"));
-				of.setOrder_date(rs.getString("order_date"));
+				of.setOrderDate(rs.getString("order_date"));
 		
 				list.add(of);
 			}
@@ -134,7 +128,7 @@ public class OrderFoodManage extends DAO {
 		
 		try {
 			conn();
-			String sql = "select price*count money FROM ORDERFOOD group by order_date ";
+			String sql = "select sum(price*count) \"총매출\" from orderfood group by order_date";
 			
 			stmt=conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -144,7 +138,7 @@ public class OrderFoodManage extends DAO {
 				
 				of.setPrice(rs.getInt("price"));
 				of.setCount(rs.getInt("count"));
-				of.setOrder_date(rs.getString("order_date"));
+				of.setOrderDate(rs.getString("order_date"));
 		
 				list.add(of);
 			}

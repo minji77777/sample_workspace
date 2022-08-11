@@ -28,20 +28,24 @@ public class BoardManage extends DAO{
 		public List<Board> getBoardList() {
 			List<Board> list = new ArrayList<Board>();
 			Board board = null;
+			int result=0;
 			try {
 				conn();
-				String sql = "select b.no,m.member_id, b.content, b.write_date"
-						+" where b.member_id=m.member_id ";
-				stmt = conn.createStatement();
+				String sql = "insert into board values(?,?,?,?)";
+				
+				pstmt = conn.prepareStatement(sql);
 
-				rs = stmt.executeQuery(sql);
+				result = pstmt.executeUpdate();
 
 				while (rs.next()) {
 					board = new Board();
-					board.setNo(rs.getInt("no"));
-					board.setContent(rs.getString("content"));
-					board.setMemberId(rs.getString("member_id"));
-					board.setWriteDate(rs.getString("write_date"));
+				
+					pstmt.setInt(1, board.getNo());
+					pstmt.setString(2, board.getMemberId());
+					pstmt.setString(3, board.getContent());
+					pstmt.setString(4, board.getWriteDate());
+					
+					result = pstmt.executeUpdate();
 					
 					list.add(board);
 							

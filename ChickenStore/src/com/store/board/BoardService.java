@@ -15,28 +15,32 @@ public class BoardService extends DAO {
 	LocalDateTime now = LocalDateTime.now(); // 현재 날짜/시간
 	String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss"));
 
-	BoardService bs = new BoardService();
+//	BoardService bs = new BoardService();
 	Board board = new Board();
 
-	public void seeBoard() {
+	public void seeBoard(Board board) {
 
-		
 		List<Board> list = new ArrayList<Board>();
 		
 		System.out.println("회원 ID>>");
+		String id = scn.nextLine();
 		
-
 		System.out.println("내용입력>>");
 		String content = scn.nextLine();
 		
+		System.out.println("날짜>");
+		String date = scn.nextLine();
+		
+		board=new Board(id,content,date);
+		
+		
+	for(Board b : list)	{
 		System.out.println();//가독성
 		System.out.println("─────────────────────────────────");
 		System.out.println("<공지사항> 총 " + list.size() + "건");
 		System.out.println("─────────────────────────────────");
-		for (Board b : list) {
-			System.out.printf("d. %s / %s / %s", b.getNo(), b.getContent(), b.getMemberId(), b.getWriteDate());
-		}
-		System.out.println("─────────────────────────────────");
+		System.out.println( b.getContent() + b.getMemberId() + b.getWriteDate());
+	}
 
 	}
 
@@ -44,3 +48,5 @@ public class BoardService extends DAO {
 	
 
 }
+
+

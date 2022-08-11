@@ -19,8 +19,7 @@ public class MemberService {
 		System.out.println("PW>");
 		String pw = scn.nextLine();
 		
-		//1 row 
-		//id/pw....
+		
 		member=MemberManage.getInstance().loginInfo(id);
 		                                              
 		//DB 조회한 정보와 내가 입력한 PW 비교

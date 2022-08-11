@@ -4,19 +4,13 @@ public class OrderFood {
 	
 	private String menuName; // 치킨이름
 	private int price; // 치킨 가격
-	private String order_date; // 주문 날짜, 시간
-	private String member_id; // 주문 고객 id
-	private String no;
+	private String orderDate; // 주문 날짜, 시간
+	private String memberId; // 주문 고객 id
+	private int no;
 	private int count; // 주문 건수
 	
 	
 	
-	public String getNo() {
-		return no;
-	}
-	public void setNo(String no) {
-		this.no = no;
-	}
 	public String getMenuName() {
 		return menuName;
 	}
@@ -29,20 +23,25 @@ public class OrderFood {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getOrder_date() {
-		return order_date;
+	public String getOrderDate() {
+		return orderDate;
 	}
-	public void setOrder_date(String order_date) {
-		this.order_date = order_date;
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
 	}
-	public String getMember_id() {
-		return member_id;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	
-	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public int getCount() {
 		return count;
 	}
@@ -51,16 +50,8 @@ public class OrderFood {
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "주문내역 \n"+ "["+member_id+ menuName  + count + order_date+"]";
-	}
 	
 	
-	
-	public OrderFood() {
-		
-	}
 	
 	
 	

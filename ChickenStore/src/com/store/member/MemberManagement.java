@@ -3,6 +3,7 @@ package com.store.member;
 import com.store.common.DAO;
 
 public class MemberManagement extends DAO {
+	
 
 	// 싱글톤
 	private static MemberManagement mm = new MemberManagement();
@@ -75,7 +76,7 @@ public class MemberManagement extends DAO {
 		Member member = null;
 		try {
 			conn();
-			String sql = "select * from member where memberId = ?";
+			String sql = "select * from member where member_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 
@@ -142,14 +143,17 @@ public class MemberManagement extends DAO {
 	}
 	
 	//회원정보 변경
-	public int updateMember(Member member) {
+	public int updateMember(String memberId,String memberPw) {
+		
+		MemberService ms = new MemberService();
+		
 		int result= 0;
 		try {
 			conn();
 			String sql  ="update member set member_pw=? where member_id=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, rs.getString("member_id"));
-			pstmt.setString(2, rs.getString("member_pw"));
+			pstmt.setString(1, ms.update(memberPw));
+			pstmt.setString(2, rs.getString("member_id"));
 			result = pstmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -159,7 +163,37 @@ public class MemberManagement extends DAO {
 		}
 		return result;
 	}
-	
+
 
 	
+	//로그인
+	public Member loginInfo(String id) {
+		Member member = null;
+		try {
+			conn();
+			String sql = "select * from member where member_id =? ";
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {  //단건조회
+				member= new Member();
+				member.setMemberId(rs.getString("member_id"));
+				member.setMemberPw(rs.getString("member_pw"));
+				member.setMemberAddr(rs.getString("member_addr"));
+				member.setMemberTel(rs.getString("member_tel"));
+				member.setRole(rs.getString("role"));
+				
 }
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconnect();
+		}
+		return member;
+	}
+}
+

@@ -34,6 +34,17 @@ public class Board {
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
+	public Board( String memberId, String content, String writeDate) {
+		
+		
+		this.memberId = memberId;
+		this.content = content;
+		this.writeDate = writeDate;
+	}
+	
+	public Board() {};
+	
+	
 	
 	
 
